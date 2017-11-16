@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Serious estimation tool</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="assets/css/vex.css" />
+        <link rel="stylesheet" href="assets/css/vex-theme-flat-attack.css" />
+
+        <style>
+            #magic-ball {
+                background-image: url('assets/img/8ball.png');
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                margin: 0 auto 0 auto;
+            }
+
+            h1, h2, h3 {
+                text-align: center;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div id="intro">
+            <h1>Serious estimation tool will help you get your estimates straight</h1>
+
+            <h3>
+                <a href="#" id="how-it-works">But how?</a>
+            </h3>
+        </div>
+
+        <div id="magic-ball"></div>
+
+
+        <script src="assets/js/jquery-3.2.1.min.js"></script>
+        <script src="assets/js/jquery-ui.min.js"></script>
+        <script src="assets/js/shake.js"></script>
+        <script src="assets/js/vex.combined.min.js"></script>
+
+        <script>
+            var animationRunning = false;
+
+            function shakeTheBall() {
+                if (animationRunning) {
+                    return;
+                }
+
+                animationRunning = true;
+
+                $('#magic-ball').effect({
+                    effect: 'shake',
+                    duration: 400,
+                    distance: 50,
+                    complete: function () {
+                        animationRunning = false;
+                        readTheFuture();
+                    }
+                });
+            }
+
+            function readTheFuture() {
+                var messages = [
+                    'Fucking pad it, or regret it!',
+                    '8 to 32 hours',
+                    'check again',
+                    '8h + FE, depending on the design',
+                    '404 - estimate not found',
+                    '6h, if the design doesn\'t go wild',
+                    '400 bad request - you need to concentrate harder on the task at hand'
+                ];
+
+                var index = Math.round(Math.random() * (messages.length - 1));
+                vex.dialog.alert(messages[index]);
+            }
+
+            function fitToViewport() {
+                var maxWidth = 900,
+                        maxHeight = 900,
+                        introHeight = $('#intro h1').outerHeight(true) + $('#intro h3').outerHeight(true),
+                        width = window.innerWidth - 20,
+                        height = window.innerHeight - introHeight - 20;
+
+                $('#magic-ball').css({
+                    width: Math.min(maxWidth, width) + 'px',
+                    height: Math.min(maxHeight, height) + 'px'
+                });
+            }
+
+            $(window).on('shake', function () {
+                shakeTheBall();
+            });
+
+            $(window).on('resize', function () {
+                fitToViewport();
+            });
+
+            $(document).ready(function () {
+                vex.defaultOptions.className = 'vex-theme-flat-attack';
+                fitToViewport();
+
+                var shake = new Shake({
+                    // shake strength threshold
+                    threshold: 10,
+                    // frequency of event generation
+                    timeout: 1000
+                });
+
+                shake.start();
+
+                $('#magic-ball').on('click', shakeTheBall);
+
+                $('#how-it-works').on('click', function (e) {
+                    e.preventDefault();
+                    var explanation = 'Shake the 8 ball or click on it and get help';
+                });
+
+            });
+        </script>
+
+    </body>
+
+</html>
