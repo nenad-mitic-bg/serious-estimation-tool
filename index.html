@@ -117,7 +117,20 @@
 
                 $('#how-it-works').on('click', function (e) {
                     e.preventDefault();
-                    var explanation = 'Shake the 8 ball or click on it and get help';
+                    var explanation = 'Shake the 8 ball or click on it and get help.'
+                            + '<br/><br/>'
+                            + 'This tool leverages multiple brain dumps made by '
+                            + 'several field leading, award winning experts, to '
+                            + 'create a scalable solution for most of day-to-day '
+                            + 'engineering problems. By combining these brain '
+                            + 'dumps we create a synergy of expertise, that we '
+                            + 'use with our patent-pending AI algorithm which '
+                            + 'results in concise recommendations that improve '
+                            + 'the accuracy of your estimations.';
+
+                    vex.open({
+                        unsafeContent: explanation
+                    });
                 });
 
             });
