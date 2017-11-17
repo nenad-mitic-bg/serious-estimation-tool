@@ -89,12 +89,16 @@
                 var maxWidth = 900,
                         maxHeight = 900,
                         introHeight = $('#intro h1').outerHeight(true) + $('#intro h3').outerHeight(true),
-                        width = window.innerWidth - 20,
-                        height = window.innerHeight - introHeight - 20;
+                        winWidth = window.innerWidth - 20,
+                        winHeight = window.innerHeight - introHeight - 20;
+
+                var width = Math.min(maxWidth, winWidth);
+                var height = Math.min(maxHeight, winHeight);
+                var dimension = Math.min(width, height);
 
                 $('#magic-ball').css({
-                    width: Math.min(maxWidth, width) + 'px',
-                    height: Math.min(maxHeight, height) + 'px'
+                    width: dimension + 'px',
+                    height: dimension + 'px'
                 });
             }
 
